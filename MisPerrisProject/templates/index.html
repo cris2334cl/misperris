@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="En Mis Perris rescatamos, cuidamos y buscamos hogares responsables para perros que necesitan una familia." />
+    <title>Mis Perris | Adopta con amor</title>
+    <style>
+      :root {
+        --ink: #25312d;
+        --muted: #69746f;
+        --green: #276b52;
+        --green-dark: #194d3b;
+        --lime: #d8efb2;
+        --cream: #f8f7f1;
+        --white: #fff;
+        --line: #e6e8e1;
+        --shadow: 0 18px 50px rgba(26, 48, 37, .1);
+      }
+
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        color: var(--ink);
+        font-family: "Segoe UI", Arial, sans-serif;
+        line-height: 1.6;
+        background: var(--white);
+      }
+      a { color: inherit; }
+      img { display: block; max-width: 100%; }
+      .container { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
+      .eyebrow {
+        color: var(--green);
+        font-size: .78rem;
+        font-weight: 800;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+      }
+      .section { padding: 88px 0; }
+      .section-heading { max-width: 650px; margin: 0 auto 42px; text-align: center; }
+      .section-heading h2 {
+        margin: 8px 0 12px;
+        font-size: clamp(2rem, 4vw, 3rem);
+        line-height: 1.1;
+        letter-spacing: -.04em;
+      }
+      .section-heading p { margin: 0; color: var(--muted); }
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 9px;
+        min-height: 48px;
+        padding: 12px 21px;
+        border: 0;
+        border-radius: 999px;
+        color: var(--white);
+        background: var(--green);
+        font: inherit;
+        font-weight: 750;
+        text-decoration: none;
+        cursor: pointer;
+        transition: background .2s ease, transform .2s ease;
+      }
+      .button:hover { background: var(--green-dark); transform: translateY(-2px); }
+      .button-light { color: var(--green-dark); background: var(--white); }
+      .button-light:hover { color: var(--white); }
+
+      .site-header {
+        position: sticky;
+        z-index: 10;
+        top: 0;
+        background: rgba(255, 255, 255, .96);
+        border-bottom: 1px solid rgba(230, 232, 225, .8);
+        backdrop-filter: blur(12px);
+      }
+      .nav { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+      .brand { display: inline-flex; align-items: center; gap: 10px; color: var(--green-dark); text-decoration: none; font-size: 1.25rem; font-weight: 850; letter-spacing: -.04em; }
+      .brand-mark { display: grid; width: 38px; height: 38px; place-items: center; border-radius: 13px; background: var(--lime); font-size: 1.25rem; }
+      .nav-links { display: flex; align-items: center; gap: 27px; }
+      .nav-links a { color: var(--muted); text-decoration: none; font-size: .92rem; font-weight: 650; }
+      .nav-links a:hover { color: var(--green); }
+      .nav-links .button { color: var(--white); }
+
+      .hero {
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        min-height: 590px;
+        align-items: center;
+        color: var(--white);
+        background:
+          linear-gradient(90deg, rgba(21, 48, 36, .88) 0%, rgba(21, 48, 36, .66) 48%, rgba(21, 48, 36, .1) 100%),
+          url("https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=2000&q=90") center 48% / cover;
+      }
+      .hero-content { max-width: 640px; padding: 80px 0; }
+      .hero .eyebrow { color: var(--lime); }
+      .hero h1 { margin: 14px 0 18px; font-size: clamp(3rem, 7vw, 5.3rem); line-height: .99; letter-spacing: -.065em; }
+      .hero p { max-width: 510px; margin: 0; color: rgba(255, 255, 255, .86); font-size: 1.12rem; }
+      .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 29px; }
+      .hero-note { margin-top: 26px; color: rgba(255, 255, 255, .78); font-size: .9rem; }
+
+      .values { position: relative; z-index: 1; margin-top: -34px; }
+      .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); padding: 24px; border: 1px solid var(--line); border-radius: 20px; background: var(--white); box-shadow: var(--shadow); }
+      .value { display: flex; align-items: center; gap: 14px; padding: 8px 24px; }
+      .value + .value { border-left: 1px solid var(--line); }
+      .value-icon { display: grid; flex: 0 0 46px; width: 46px; height: 46px; place-items: center; border-radius: 15px; background: var(--cream); font-size: 1.35rem; }
+      .value strong { display: block; font-size: .98rem; }
+      .value span:last-child { color: var(--muted); font-size: .85rem; }
+
+      .gallery { background: var(--cream); }
+      .dog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+      .dog-card { overflow: hidden; border-radius: 18px; background: var(--white); box-shadow: 0 10px 30px rgba(26, 48, 37, .07); }
+      .dog-photo { position: relative; height: 260px; background: #e8ece4; }
+      .dog-photo img { width: 100%; height: 100%; object-fit: cover; }
+      .dog-tag { position: absolute; top: 14px; left: 14px; padding: 6px 12px; border-radius: 999px; color: var(--green-dark); background: var(--lime); font-size: .77rem; font-weight: 800; }
+      .dog-info { padding: 21px; }
+      .dog-title { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+      .dog-title h3 { margin: 0; font-size: 1.35rem; }
+      .dog-age { color: var(--muted); font-size: .86rem; }
+      .dog-info p { min-height: 49px; margin: 10px 0 17px; color: var(--muted); font-size: .92rem; }
+      .dog-info .button { min-height: 42px; padding: 9px 17px; font-size: .88rem; }
+
+      .about-grid { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 64px; }
+      .about-photo { position: relative; min-height: 410px; }
+      .about-photo img { width: 100%; height: 410px; object-fit: cover; border-radius: 24px; }
+      .photo-note { position: absolute; right: -20px; bottom: 24px; max-width: 205px; padding: 18px; border-radius: 16px; background: var(--lime); color: var(--green-dark); font-weight: 750; box-shadow: var(--shadow); }
+      .about-copy h2 { margin: 8px 0 16px; font-size: clamp(2rem, 4vw, 3rem); line-height: 1.08; letter-spacing: -.045em; }
+      .about-copy > p { color: var(--muted); }
+      .check-list { display: grid; gap: 12px; margin: 24px 0 28px; padding: 0; list-style: none; }
+      .check-list li { display: flex; align-items: flex-start; gap: 11px; }
+      .check { display: grid; flex: 0 0 23px; width: 23px; height: 23px; place-items: center; border-radius: 50%; color: var(--green-dark); background: var(--lime); font-size: .8rem; font-weight: 900; }
+
+      .steps { color: var(--white); background: var(--green-dark); }
+      .steps .section-heading h2 { color: var(--white); }
+      .steps .section-heading p { color: rgba(255, 255, 255, .7); }
+      .steps .eyebrow { color: var(--lime); }
+      .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+      .step { padding: 26px; border: 1px solid rgba(255, 255, 255, .17); border-radius: 18px; background: rgba(255, 255, 255, .06); }
+      .step-number { display: grid; width: 42px; height: 42px; place-items: center; border-radius: 14px; color: var(--green-dark); background: var(--lime); font-weight: 900; }
+      .step h3 { margin: 18px 0 8px; font-size: 1.2rem; }
+      .step p { margin: 0; color: rgba(255, 255, 255, .72); font-size: .92rem; }
+
+      .forms-section { background: var(--cream); }
+      .forms-grid { display: grid; grid-template-columns: 1fr 1fr; align-items: start; gap: 24px; }
+      .form-card { padding: 30px; border: 1px solid var(--line); border-radius: 20px; background: var(--white); box-shadow: 0 10px 30px rgba(26, 48, 37, .05); }
+      .form-card h3 { margin: 6px 0 5px; font-size: 1.55rem; letter-spacing: -.035em; }
+      .form-card > p { margin: 0 0 22px; color: var(--muted); font-size: .92rem; }
+      .form-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+      .field { display: grid; gap: 6px; }
+      .field-wide { grid-column: 1 / -1; }
+      .field label { color: #35433c; font-size: .84rem; font-weight: 750; }
+      .field input, .field select, .field textarea {
+        width: 100%;
+        min-height: 45px;
+        padding: 10px 12px;
+        border: 1px solid #dfe4dc;
+        border-radius: 10px;
+        color: var(--ink);
+        background: #fff;
+        font: inherit;
+        font-size: .92rem;
+      }
+      .field textarea { min-height: 105px; resize: vertical; }
+      .field input:focus, .field select:focus, .field textarea:focus { outline: 3px solid rgba(39, 107, 82, .15); border-color: var(--green); }
+      .form-card .button { width: 100%; margin-top: 17px; }
+      .form-error { color: #a32323; font-size: .82rem; }
+      .form-alert { margin-bottom: 22px; padding: 13px 16px; border-radius: 12px; color: var(--green-dark); background: var(--lime); font-weight: 700; }
+      .form-alert-error { color: #8a1f1f; background: #fde8e7; }
+
+      .faq-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 60px; }
+      .faq-intro h2 { margin: 8px 0 14px; font-size: clamp(2rem, 4vw, 2.8rem); line-height: 1.08; letter-spacing: -.045em; }
+      .faq-intro p { color: var(--muted); }
+      .faq-list details { padding: 18px 0; border-bottom: 1px solid var(--line); }
+      .faq-list summary { cursor: pointer; font-weight: 750; }
+      .faq-list details p { margin: 10px 0 0; color: var(--muted); font-size: .94rem; }
+
+      .site-footer { padding: 38px 0; color: rgba(255, 255, 255, .75); background: #173d30; }
+      .footer-grid { display: flex; align-items: center; justify-content: space-between; gap: 25px; }
+      .site-footer .brand { color: var(--white); }
+      .site-footer p { margin: 8px 0 0; font-size: .88rem; }
+      .footer-links { display: flex; flex-wrap: wrap; gap: 20px; }
+      .footer-links a { color: var(--white); text-decoration: none; font-size: .9rem; }
+      .copyright { padding-top: 22px; margin-top: 24px; border-top: 1px solid rgba(255, 255, 255, .16); font-size: .8rem; }
+
+      @media (max-width: 800px) {
+        .nav { min-height: 68px; }
+        .nav-links { gap: 14px; }
+        .nav-links a:not(.button) { display: none; }
+        .hero { min-height: 540px; background-position: 58% center; }
+        .values-grid { grid-template-columns: 1fr; gap: 12px; }
+        .value { padding: 8px; }
+        .value + .value { border-left: 0; border-top: 1px solid var(--line); padding-top: 18px; }
+        .dog-grid { grid-template-columns: 1fr 1fr; }
+        .about-grid, .faq-grid { grid-template-columns: 1fr; gap: 40px; }
+        .about-photo { min-height: 320px; }
+        .about-photo img { height: 320px; }
+      }
+      @media (max-width: 560px) {
+        .container { width: min(100% - 28px, 1120px); }
+        .section { padding: 65px 0; }
+        .nav-links .button { min-height: 40px; padding: 8px 13px; font-size: .82rem; }
+        .hero { min-height: 520px; background-position: 62% center; }
+        .hero h1 { font-size: 3.2rem; }
+        .hero p { font-size: 1rem; }
+        .dog-grid, .steps-grid, .forms-grid { grid-template-columns: 1fr; }
+        .dog-photo { height: 240px; }
+        .photo-note { right: 10px; }
+        .form-card { padding: 23px 18px; }
+        .form-fields { grid-template-columns: 1fr; }
+        .field-wide { grid-column: auto; }
+        .footer-grid { align-items: flex-start; flex-direction: column; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        *, *::before, *::after { transition-duration: .01ms !important; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="container nav" aria-label="Navegación principal">
+        <a class="brand" href="#inicio"><span class="brand-mark" aria-hidden="true">🐾</span> Mis Perris</a>
+        <div class="nav-links">
+          <a href="#adopta">Adopta</a>
+          <a href="#nosotros">Nosotros</a>
+          <a href="#proceso">Cómo funciona</a>
+          <a href="{% url 'mascotas' %}">Mascotas</a>
+          {% if user.is_authenticated %}
+            <a class="button" href="{% url 'logout' %}">Cerrar sesión</a>
+          {% else %}
+            <a class="button" href="{% url 'login' %}">Iniciar sesión</a>
+          {% endif %}
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" id="inicio">
+        <div class="container">
+          <div class="hero-content">
+            <span class="eyebrow">Un hogar cambia una vida</span>
+            <h1>Amor del bueno,<br />con cuatro patas.</h1>
+            <p>Rescatamos, cuidamos y acompañamos a cada perrito hasta encontrar una familia que lo quiera para siempre.</p>
+            <div class="hero-actions">
+              <a class="button button-light" href="#adopta">Conoce a los perritos <span aria-hidden="true">→</span></a>
+              <a class="button" href="#nosotros">Conócenos</a>
+            </div>
+            <div class="hero-note">Adopta con responsabilidad. Gana un compañero para toda la vida.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="values container" aria-label="Nuestro compromiso">
+        <div class="values-grid">
+          <div class="value"><span class="value-icon" aria-hidden="true">🏥</span><div><strong>Salud y cuidado</strong><span>Atención veterinaria y cariño</span></div></div>
+          <div class="value"><span class="value-icon" aria-hidden="true">🏡</span><div><strong>Adopción responsable</strong><span>Familias compatibles y felices</span></div></div>
+          <div class="value"><span class="value-icon" aria-hidden="true">🤝</span><div><strong>Apoyo constante</strong><span>Te acompañamos en el proceso</span></div></div>
+        </div>
+      </section>
+
+      <section class="section gallery" id="adopta">
+        <div class="container">
+          <div class="section-heading">
+            <span class="eyebrow">En busca de familia</span>
+            <h2>Amigos que esperan conocerte</h2>
+            <p>Cada uno tiene su propia historia y mucho amor para compartir. ¿Te gustaría conocerlos?</p>
+          </div>
+          <div class="dog-grid">
+            {% for perrito in perritos %}
+            <article class="dog-card">
+              <div class="dog-photo">
+                <img src="{{ perrito.imagen }}" alt="Perrito llamado {{ perrito.nombre }} buscando hogar" loading="lazy" />
+                <span class="dog-tag">Busca familia</span>
+              </div>
+              <div class="dog-info">
+                <div class="dog-title"><h3>{{ perrito.nombre }}</h3><span class="dog-age">{{ perrito.edad }}</span></div>
+                <p>{{ perrito.descripcion }} Tamaño {{ perrito.tamano|lower }}.</p>
+                <a class="button" href="#form-adopcion" data-pet="{{ perrito.nombre }}">Quiero conocerle</a>
+              </div>
+            </article>
+            {% endfor %}
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="nosotros">
+        <div class="container about-grid">
+          <div class="about-photo">
+            <img src="https://images.unsplash.com/photo-1601758123927-196b7c2fe6e8?auto=format&fit=crop&w=1100&q=85" alt="Voluntaria compartiendo con un perro rescatado" loading="lazy" />
+            <div class="photo-note">Pequeños actos de amor. Grandes historias felices.</div>
+          </div>
+          <div class="about-copy">
+            <span class="eyebrow">Quiénes somos</span>
+            <h2>Una segunda oportunidad empieza con nosotros.</h2>
+            <p>En Mis Perris trabajamos por el bienestar de perros que necesitan protección. Los cuidamos, recuperamos su confianza y buscamos hogares donde sean parte de la familia.</p>
+            <ul class="check-list">
+              <li><span class="check" aria-hidden="true">✓</span><span>Rescate y recuperación en un entorno seguro.</span></li>
+              <li><span class="check" aria-hidden="true">✓</span><span>Evaluación veterinaria y acompañamiento.</span></li>
+              <li><span class="check" aria-hidden="true">✓</span><span>Orientación antes y después de la adopción.</span></li>
+            </ul>
+            <a class="button" href="#contacto">Súmate a la causa</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section steps" id="proceso">
+        <div class="container">
+          <div class="section-heading">
+            <span class="eyebrow">Adoptar es fácil</span>
+            <h2>Un proceso pensado para que salga bien</h2>
+            <p>Te orientamos en cada paso para encontrar a tu compañero ideal.</p>
+          </div>
+          <div class="steps-grid">
+            <article class="step"><span class="step-number">01</span><h3>Elige a tu compañero</h3><p>Revisa la galería y cuéntanos cuál perrito te gustaría conocer.</p></article>
+            <article class="step"><span class="step-number">02</span><h3>Conversemos</h3><p>Nos pondremos en contacto para conocerte y resolver tus dudas.</p></article>
+            <article class="step"><span class="step-number">03</span><h3>Comienza una nueva vida</h3><p>Si todo encaja, coordinamos el encuentro y te acompañamos en la adaptación.</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section forms-section" id="contacto">
+        <div class="container">
+          <div class="section-heading">
+            <span class="eyebrow">Da el primer paso</span>
+            <h2>Hay muchas formas de ayudar</h2>
+            <p>Déjanos tus datos y nuestro equipo se pondrá en contacto contigo.</p>
+          </div>
+
+          {% if messages %}
+            {% for message in messages %}
+            <div class="form-alert" role="status">{{ message }}</div>
+            {% endfor %}
+          {% endif %}
+
+          <div class="forms-grid">
+            <section class="form-card" id="form-adopcion">
+              <span class="eyebrow">Adopción</span>
+              <h3>¿Listo para sumar amor?</h3>
+              <p>Cuéntanos un poco sobre ti y el perrito que te interesa.</p>
+              {% if adoption_form.errors %}
+              <div class="form-alert form-alert-error" role="alert">Revisa los campos marcados e inténtalo nuevamente.</div>
+              {% endif %}
+              <form method="post" action="{% url 'home' %}#form-adopcion">
+                {% csrf_token %}
+                {{ adoption_form.tipo }}
+                <div class="form-fields">
+                  <div class="field"><label for="{{ adoption_form.nombre.id_for_label }}">Nombre completo</label>{{ adoption_form.nombre }}{{ adoption_form.nombre.errors }}</div>
+                  <div class="field"><label for="{{ adoption_form.email.id_for_label }}">Correo electrónico</label>{{ adoption_form.email }}{{ adoption_form.email.errors }}</div>
+                  <div class="field"><label for="{{ adoption_form.telefono.id_for_label }}">Teléfono (opcional)</label>{{ adoption_form.telefono }}{{ adoption_form.telefono.errors }}</div>
+                  <div class="field"><label for="{{ adoption_form.mascota_interes.id_for_label }}">Perrito que te interesa</label>{{ adoption_form.mascota_interes }}{{ adoption_form.mascota_interes.errors }}</div>
+                  <div class="field field-wide"><label for="{{ adoption_form.mensaje.id_for_label }}">Cuéntanos sobre tu hogar y disponibilidad</label>{{ adoption_form.mensaje }}{{ adoption_form.mensaje.errors }}</div>
+                </div>
+                <button class="button" type="submit">Enviar solicitud de adopción</button>
+              </form>
+            </section>
+
+            <section class="form-card">
+              <span class="eyebrow">Voluntariado</span>
+              <h3>Tu tiempo también transforma</h3>
+              <p>Ayúdanos con paseos, difusión, jornadas o cuidados temporales.</p>
+              {% if volunteer_form.errors %}
+              <div class="form-alert form-alert-error" role="alert">Revisa los campos marcados e inténtalo nuevamente.</div>
+              {% endif %}
+              <form method="post" action="{% url 'home' %}#contacto">
+                {% csrf_token %}
+                {{ volunteer_form.tipo }}
+                <div class="form-fields">
+                  <div class="field"><label for="{{ volunteer_form.nombre.id_for_label }}">Nombre completo</label>{{ volunteer_form.nombre }}{{ volunteer_form.nombre.errors }}</div>
+                  <div class="field"><label for="{{ volunteer_form.email.id_for_label }}">Correo electrónico</label>{{ volunteer_form.email }}{{ volunteer_form.email.errors }}</div>
+                  <div class="field field-wide"><label for="{{ volunteer_form.telefono.id_for_label }}">Teléfono (opcional)</label>{{ volunteer_form.telefono }}{{ volunteer_form.telefono.errors }}</div>
+                  <div class="field field-wide"><label for="{{ volunteer_form.mensaje.id_for_label }}">¿Cómo te gustaría ayudar?</label>{{ volunteer_form.mensaje }}{{ volunteer_form.mensaje.errors }}</div>
+                </div>
+                <button class="button" type="submit">Quiero ser voluntario/a</button>
+              </form>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="preguntas">
+        <div class="container faq-grid">
+          <div class="faq-intro">
+            <span class="eyebrow">¿Tienes dudas?</span>
+            <h2>Antes de adoptar, conversemos.</h2>
+            <p>Adoptar es un compromiso para toda la vida. Queremos que tengas toda la información para tomar una decisión responsable.</p>
+            <a class="button" href="#contacto">Escríbenos</a>
+          </div>
+          <div class="faq-list">
+            <details><summary>¿Cuánto cuesta adoptar?</summary><p>La adopción responsable no es una compra. Nuestro equipo te explicará los requisitos y cualquier aporte asociado a los cuidados veterinarios del perrito.</p></details>
+            <details><summary>¿Puedo conocer al perrito antes?</summary><p>¡Claro! Coordinaremos una conversación y un encuentro para que puedan conocerse con calma.</p></details>
+            <details><summary>¿Qué necesito para adoptar?</summary><p>Necesitas compromiso, tiempo y un hogar preparado para integrar a un nuevo miembro de la familia. Te guiaremos con los detalles durante el proceso.</p></details>
+            <details><summary>¿Y si no puedo adoptar, cómo ayudo?</summary><p>Puedes participar como voluntario, compartir la página o ayudarnos con cuidados temporales. Envíanos una solicitud de voluntariado.</p></details>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <a class="brand" href="#inicio"><span class="brand-mark" aria-hidden="true">🐾</span> Mis Perris</a>
+            <p>Más colitas felices, más familias completas.</p>
+          </div>
+          <div class="footer-links">
+            <a href="#adopta">Adopta</a><a href="#nosotros">Nosotros</a><a href="#proceso">Proceso</a><a href="#contacto">Contacto</a>
+          </div>
+        </div>
+        <div class="copyright">© 2026 Mis Perris. Hecho con amor por quienes creen en las segundas oportunidades.</div>
+      </div>
+    </footer>
+
+    <script>
+      document.querySelectorAll('[data-pet]').forEach((link) => {
+        link.addEventListener('click', () => {
+          const select = document.getElementById('id_adopcion-mascota_interes');
+          if (select) select.value = link.dataset.pet;
+        });
+      });
+    </script>
+  </body>
+</html>

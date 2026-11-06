@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Iniciar sesión | Mis Perris</title>
+    <style>
+      body {
+        margin: 0; font-family: "Segoe UI", Arial, sans-serif; background: #f5f6f1; color: #25312d;
+      }
+      .container { max-width: 540px; margin: 0 auto; padding: 64px 20px; }
+      .card {
+        background: white; border: 1px solid #e6e8e1; border-radius: 20px; box-shadow: 0 10px 30px rgba(26,48,37,.06);
+        padding: 30px;
+      }
+      h1 { margin-top: 0; }
+      form { display: grid; gap: 18px; }
+      label { font-weight: 700; }
+      input {
+        width: 100%; min-height: 46px; padding: 10px 12px; border: 1px solid #dfe4dc; border-radius: 10px;
+        font: inherit; font-size: 1rem;
+      }
+      button {
+        border: 0; border-radius: 999px; background: #276b52; color: white; padding: 12px 18px; font: inherit; font-weight: 700; cursor: pointer;
+      }
+      .messages { list-style: none; padding: 0; margin: 0 0 18px; }
+      .messages li {
+        padding: 12px 14px; border-radius: 12px; background: #d8efb2; color: #194d3b; margin-bottom: 10px;
+      }
+      .messages li.error { background: #fde8e7; color: #8a1f1f; }
+      .link { display: inline-block; margin-top: 18px; color: #276b52; font-weight: 700; text-decoration: none; }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="card">
+        <h1>Iniciar sesión</h1>
+
+        {% if messages %}
+          <ul class="messages">
+            {% for message in messages %}
+              <li class="{% if message.tags == 'error' %}error{% endif %}">{{ message }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+
+        <form method="post">
+          {% csrf_token %}
+          {% if request.GET.next %}
+            <input type="hidden" name="next" value="{{ request.GET.next }}" />
+          {% endif %}
+          <div>
+            <label for="username">Usuario</label>
+            <input id="username" type="text" name="username" required />
+          </div>
+          <div>
+            <label for="password">Contraseña</label>
+            <input id="password" type="password" name="password" required />
+          </div>
+          <button type="submit">Entrar</button>
+        </form>
+
+        <a class="link" href="{% url 'home' %}">Volver a la página principal</a>
+      </div>
+    </div>
+  </body>
+</html>

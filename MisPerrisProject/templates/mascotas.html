@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mascotas | Mis Perris</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: #f5f6f1;
+        color: #25312d;
+      }
+      .container { max-width: 1100px; margin: 0 auto; padding: 32px 20px 60px; }
+      .topbar {
+        display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 30px;
+      }
+      .button {
+        display: inline-block; padding: 12px 18px; border-radius: 999px; text-decoration: none; font-weight: 700;
+        background: #276b52; color: white;
+      }
+      .button.secondary { background: #d8efb2; color: #194d3b; }
+      .button.danger { background: #a32323; color: white; }
+      .card {
+        background: white; border: 1px solid #e6e8e1; border-radius: 20px; box-shadow: 0 10px 30px rgba(26,48,37,.06);
+        padding: 24px;
+      }
+      h1 { margin: 0 0 12px; }
+      .messages { list-style: none; padding: 0; margin: 0 0 20px; }
+      .messages li { margin-bottom: 10px; padding: 12px 16px; border-radius: 12px; background: #d8efb2; color: #194d3b; }
+      .messages .error { background: #fde8e7; color: #8a1f1f; }
+      .grid { display: grid; gap: 16px; margin-top: 25px; }
+      .pet-item {
+        display: flex; justify-content: space-between; align-items: center; gap: 16px;
+        padding: 18px 20px; border: 1px solid #e6e8e1; border-radius: 16px; background: #fff;
+      }
+      .actions { display: flex; gap: 10px; flex-wrap: wrap; }
+      .muted { color: #69746f; }
+      @media (max-width: 640px) { .pet-item { flex-direction: column; align-items: flex-start; } }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="topbar">
+        <a class="button secondary" href="{% url 'home' %}">Volver al inicio</a>
+        {% if user.is_authenticated %}
+          <a class="button" href="{% url 'mascota_crear' %}">Agregar mascota</a>
+        {% else %}
+          <a class="button" href="{% url 'login' %}">Iniciar sesión</a>
+        {% endif %}
+      </div>
+
+      <div class="card">
+        <h1>Listado de mascotas</h1>
+        <p class="muted">Los usuarios invitados pueden leer la información, pero solo los usuarios autenticados pueden crear, editar o borrar registros.</p>
+
+        {% if messages %}
+          <ul class="messages">
+            {% for message in messages %}
+              <li class="{% if message.tags == 'error' %}error{% endif %}">{{ message }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+
+        <div class="grid">
+          {% for mascota in mascotas %}
+            <div class="pet-item">
+              <div>
+                <strong>{{ mascota.nombre }}</strong>
+                <div class="muted">Registrada por: {{ mascota.usuario.username }}</div>
+              </div>
+              {% if user.is_authenticated %}
+                <div class="actions">
+                  <a class="button secondary" href="{% url 'mascota_editar' mascota.pk %}">Editar</a>
+                  <a class="button danger" href="{% url 'mascota_eliminar' mascota.pk %}">Eliminar</a>
+                </div>
+              {% endif %}
+            </div>
+          {% empty %}
+            <p class="muted">Aún no hay mascotas registradas.</p>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
